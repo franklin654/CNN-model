@@ -56,7 +56,6 @@ if __name__ == '__main__':
 
     def accuracy(outputs, labels):
         _, preds = torch.max(outputs, dim=1)
-        print(preds)
         return torch.tensor(torch.sum(preds == labels).item() / len(preds))
 
 
@@ -64,12 +63,12 @@ if __name__ == '__main__':
         def __init__(self):
             super().__init__()
             self.network = nn.Sequential(
-                nn.Conv2d(3, 16, kernel_size=3, stride=1, padding=1),
+                nn.Conv2d(3, 32, kernel_size=5, stride=1, padding=1),
                 nn.ReLU(),
                 nn.MaxPool2d(2, 2),  # 400 100
-                nn.Conv2d(16, 32, kernel_size=3, stride=1, padding=2),
-                nn.Sigmoid(),
-                nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=2),
+                nn.Conv2d(32, 64, kernel_size=3, padding=1),
+                nn.ReLU(),
+                nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=2),
                 nn.ReLU(),
                 nn.MaxPool2d(2, 2),  # output: 200 50
                 nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1),
@@ -135,7 +134,7 @@ if __name__ == '__main__':
     #     print('out[0]:', out[0])
     #     break
 
-    num_epochs = 250
+    num_epochs = 10
     opt_func = torch.optim.Adam
     lr = math.exp(-4)
 
