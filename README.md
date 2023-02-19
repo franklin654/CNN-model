@@ -1,1 +1,1 @@
-# Convulutionary Neural Network  for Signature Verification
+# Convolutionary Neural Network  for Signature Verification
